@@ -1,33 +1,46 @@
+# this is hacky as fuck, don't care to clean it up though.
 import zlib
 import base64
 import struct
+import xml.dom.minidom
+import sys
 
-decoded1 = base64.b64decode("eJyTYmBg4CUTSwMxNxD7kYm5oPp9ycSj+kf1SwIxJ5TPDsQcJGAJIAYAsckszg==")
-decompressed1 = zlib.decompress(decoded1)
-decoded2 = base64.b64decode("eJxjYBgFowACnIHYBYhdieSjA38gDgDiQCL5yEAZiKOBOAaIY6FihPjIQB+3t/ACAC2zCMM=")
-decompressed2 = zlib.decompress(decoded2)
-decoded3 = base64.b64decode("eJxjYBgFo2DkAgADAAAB")
-decompressed3 = zlib.decompress(decoded3)
-decoded4 = base64.b64decode("eJxjZGBgYKQQkwtG9Y/qp4Z+Rix8YjEAUTAANA==")
-decompressed4 = zlib.decompress(decoded4)
+if len(sys.argv) < 2:
+    print "Usage:"
+    print "python mapcreate.py infile roomnumber outfile"
+    sys.exit()
 
-length = len(decompressed1)/4
+f = open(sys.argv[1], "r")
+data = f.read()
+f.close()
+
+dom = xml.dom.minidom.parseString(data)
+data = dom.getElementsByTagName("data")
+decompressed = []
+
+for d in data:
+    nodes = d.childNodes
+    for node in nodes:
+        if node.nodeType == node.TEXT_NODE:
+            decompressed.append(zlib.decompress(base64.b64decode(node.data)))
+
+length = len(decompressed[0])/4
 fmt = 'i'*length
-output1 = struct.unpack(fmt, decompressed1)
+output1 = struct.unpack(fmt, decompressed[0])
 
-length = len(decompressed2)/4
+length = len(decompressed[1])/4
 fmt = 'i'*length
-output2 = struct.unpack(fmt, decompressed2)
+output2 = struct.unpack(fmt, decompressed[1])
 
-length = len(decompressed3)/4
+length = len(decompressed[2])/4
 fmt = 'i'*length
-output3 = struct.unpack(fmt, decompressed3)
+output3 = struct.unpack(fmt, decompressed[2])
 
-length = len(decompressed4)/4
+length = len(decompressed[3])/4
 fmt = 'i'*length
-output4 = struct.unpack(fmt, decompressed4)
+output4 = struct.unpack(fmt, decompressed[3])
 
-strout = """map[0] = Room.new{
+strout = """map["""+str(sys.argv[2])+"""] = Room.new{
     -- background
     layer0 =
     {   {"""
@@ -111,4 +124,5 @@ strout = strout + """
     quads = quads["normal"]
 }"""
 
-print strout
+f = open(sys.argv[3], "w")
+f.write(strout)

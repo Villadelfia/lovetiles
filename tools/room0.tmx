@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="16" height="12" tilewidth="60" tileheight="60">
+ <tileset firstgid="1" name="tiles" tilewidth="60" tileheight="60">
+  <image source="../images/tiles.png" width="720" height="540"/>
+ </tileset>
+ <layer name="Tilelaag 1" width="16" height="12">
+  <data encoding="base64" compression="zlib">
+   eJyTYmBg4CUTSwMxNxD7kYm5oPp9ycSE9LMDMQcQc5KhH6RXAoj5gVgShxm49CPr5cdjBi79PDjCm49E/1MafvTSHwnFvkhsYjAXNFyR4xgW58RgUBwBANXaJ/0=
+  </data>
+ </layer>
+ <layer name="Tilelaag 2" width="16" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFww0o4sH4QCIa7QzELkDsikOeEPAH4gAgDiRSvTIaPxqIY4A4lkj9+kSqQwYAI+wFjg==
+  </data>
+ </layer>
+ <layer name="Tilelaag 3" width="16" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFwxGoEOATAgYE+LTWb0OATy0AABEPAYE=
+  </data>
+ </layer>
+ <layer name="Tilelaag 4" width="16" height="12">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYKQQkwtorZ+QG4mRw2cGIXFCZtBKP7FguOhHNofUtAsAdfQASg==
+  </data>
+ </layer>
+</map>
