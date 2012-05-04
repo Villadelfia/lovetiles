@@ -1,4 +1,4 @@
--- set the game to blocky interp. needed now so that ALL images have it
+-- set the game to blocky interpolation needed now so that ALL images have it
 love.graphics.setDefaultImageFilter("nearest", "nearest")
 
 -- create the map etc.
